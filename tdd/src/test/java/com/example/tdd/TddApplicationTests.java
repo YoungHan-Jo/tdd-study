@@ -1,5 +1,7 @@
 package com.example.tdd;
 
+import com.example.tdd.domain.Bank;
+import com.example.tdd.domain.Expression;
 import com.example.tdd.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,8 +34,13 @@ class TddApplicationTests {
 	}
 
 	@Test
-	public void testDifferentClassEquality() throws Exception {
-//		assertThat();
+	public void testSimpleAddition() throws Exception {
+
+		Money five = Money.dollar(5);
+		Expression result = five.plus(five);
+		Bank bank = new Bank();
+		Money reduced = bank.reduce(result, "USD");
+		assertThat(reduced).isEqualTo(Money.dollar(10));
 	}
 
 }
