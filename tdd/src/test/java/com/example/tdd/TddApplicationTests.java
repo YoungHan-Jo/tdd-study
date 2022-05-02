@@ -7,7 +7,7 @@ import com.example.tdd.domain.Sum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 //@SpringBootTest
 class TddApplicationTests {
@@ -53,4 +53,10 @@ class TddApplicationTests {
 		assertThat(result).isEqualTo(Money.dollar(7));
 	}
 
+	@Test
+	public void testReduceMoney() {
+		Bank bank = new Bank();
+		Money result = bank.reduce(Money.dollar(1), "USD");
+		assertThat(result).isEqualTo(Money.dollar(1));
+	}
 }
