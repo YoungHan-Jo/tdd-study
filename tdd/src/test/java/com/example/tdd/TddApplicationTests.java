@@ -3,6 +3,7 @@ package com.example.tdd;
 import com.example.tdd.domain.Bank;
 import com.example.tdd.domain.Expression;
 import com.example.tdd.domain.Money;
+import com.example.tdd.domain.Sum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +39,18 @@ class TddApplicationTests {
 
 		Money five = Money.dollar(5);
 		Expression result = five.plus(five);
+		Sum sum = (Sum) result;
 		Bank bank = new Bank();
-		Money reduced = bank.reduce(result, "USD");
+		Money reduced = bank.reduce(sum, "USD");
 		assertThat(reduced).isEqualTo(Money.dollar(10));
+	}
+
+	@Test
+	public void testReduceSum() {
+		Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+		Bank bank = new Bank();
+		Money result = bank.reduce(sum, "USD");
+		assertThat(result).isEqualTo(Money.dollar(7));
 	}
 
 }
